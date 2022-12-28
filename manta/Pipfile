@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+beautifulsoup4 = "*"
+pandas = "*"
+streamlit = ">=1.10.0"
+undetected-chromedriver = "*"
+selenium = "==4.2.0"
+lxml = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
