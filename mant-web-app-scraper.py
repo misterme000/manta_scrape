@@ -89,9 +89,9 @@ def scrape(category, city, state, pages):
                 key='download-csv'
             )
             df = pd.DataFrame(items_list)
-            df.to_csv('{category}-{city}-{state}-{category}-innerloop0.csv',
+"""  df.to_csv('{category}-{city}-{state}-{category}-innerloop0.csv',
                       mode='w', index=False, header=False).encode('utf-8')
-            
+"""
         
         df = pd.DataFrame(items_list)
         df.to_csv('{category}-{city}-{state}-{category}-innerloop.csv', mode='w', index=False, header=False).encode('utf-8')
@@ -99,11 +99,11 @@ def scrape(category, city, state, pages):
 
     
 
-    df = pd.DataFrame(items_list)
-    st.dataframe(df)
-    driver.quit()
+df = pd.DataFrame(items_list)
+st.dataframe(df)
+driver.quit()
 
-    csv = df.to_csv(index=False).encode('utf-8')
+"""     csv = df.to_csv(index=False).encode('utf-8')
     st.download_button(
         "Press to Download",
         csv,
@@ -111,7 +111,7 @@ def scrape(category, city, state, pages):
         "text/csv",
         key='download-csv'
     )
-
+ """
 
 if __name__ == "__main__":
     st.balloons()

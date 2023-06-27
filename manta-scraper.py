@@ -12,7 +12,7 @@ from selenium.webdriver.common.by import By
 PROXY = "us-mi1-smart.serverlocation.co:3128"
 
 options = Options()
-options.add_argument("--headless")
+#options.add_argument("--headless")
 options.add_argument("--no-sandbox")
 
 caps = DesiredCapabilities().CHROME
@@ -32,11 +32,16 @@ caps["pageLoadStrategy"] = "eager" # to make the page load faster
 print('Loading and downloading the driver')
 driver = uc.Chrome(desired_capabilities=caps, options=options)
 print('Browser loaded')
+category='Pet Clinic'
+city='New York'
+state='New York'
 
 items_list = []
-for x in range(1, 10): # you can change the number of pages
-    driver.get(f'https://www.manta.com/search?search_source=nav&search=Restaurants&city=New&state=york&device=desktop&screenResolution=2400x1300&pg={x}')
+for x in range(1, 180): # you can change the number of pages
+    #driver.get(f'https://www.manta.com/search?search_source=nav&search=Doctors&city=Syracuse&state=york&device=desktop&screenResolution=2400x1300&pg={x}')
     #driver.implicitly_wait(30)
+    #driver.get(f'https://www.manta.com/search?search_source=nav&search={category}&city={city}&state={state}&device=desktop&screenResolution=2400x1300&pg={x}')
+    driver.get(f'https://www.manta.com/search?search={category}&context=unknown&search_source=nav&city={city}&state={state}&country=United%20States&device=desktop&pt=40.6943%2C-73.9249&screenResolution=1584x990&pg={x}')
     print(f'Page {x}')
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, '//*[@id="mapid"]')))
     soup = BeautifulSoup(driver.page_source, 'lxml')
@@ -70,13 +75,17 @@ for x in range(1, 10): # you can change the number of pages
         items = {
             'Name': name,
             'Address': address,
-            'Phone': phone,
-            'Website': website
+            'Phone': phone
+            #'Website': website
         }
 
         items_list.append(items)
+    print(items_list)
+
+    df = pd.DataFrame(items_list)
+    df.to_csv(f'{category}-{city}-{state}.csv', index=False)
 
 df = pd.DataFrame(items_list)
-df.to_csv('Restaurants.csv', index=False)
+df.to_csv(f'{category}-{city}-{state}.csv', index=False)
 print(df)
 driver.quit()
