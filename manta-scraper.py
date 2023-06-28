@@ -32,12 +32,12 @@ caps["pageLoadStrategy"] = "eager" # to make the page load faster
 print('Loading and downloading the driver')
 driver = uc.Chrome(desired_capabilities=caps, options=options)
 print('Browser loaded')
-category='Pet Clinic'
+category='fitness center'
 city='New York'
 state='New York'
 
 items_list = []
-for x in range(1, 180): # you can change the number of pages
+for x in range(1, 270): # you can change the number of pages
     #driver.get(f'https://www.manta.com/search?search_source=nav&search=Doctors&city=Syracuse&state=york&device=desktop&screenResolution=2400x1300&pg={x}')
     #driver.implicitly_wait(30)
     #driver.get(f'https://www.manta.com/search?search_source=nav&search={category}&city={city}&state={state}&device=desktop&screenResolution=2400x1300&pg={x}')
